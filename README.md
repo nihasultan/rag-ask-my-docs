@@ -2,6 +2,9 @@
 
 An end-to-end Retrieval-Augmented Generation (RAG) system that allows users to query documents using natural language.
 
+# Live Demo:
+https://rag-ask-my-docs-8gntjzhca5cxug28eagp9m.streamlit.app/
+
 # Overview
 
 Ask My Docs is designed to solve a common problem:
