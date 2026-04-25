@@ -2,7 +2,7 @@ import os
 import requests
 import streamlit as st
 
-API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-large"
+API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-base"
 HEADERS = {
     "Authorization": f"Bearer {st.secrets['HUGGINGFACE_API_KEY']}"
 }
@@ -45,6 +45,8 @@ Answer:
             "temperature": 0.3
         }
     })
+    if isinstance(output, dict) and "error" in output:
+        return "Model is loading or API error. Please try again in a few seconds."
 
     try:
         return output[0]["generated_text"]
