@@ -9,7 +9,17 @@ HEADERS = {
 
 def query_hf(payload):
     response = requests.post(API_URL, headers=HEADERS, json=payload)
-    return response.json()
+
+    # debug info
+    if response.status_code != 200:
+        print("HF ERROR:", response.status_code, response.text)
+        return {"error": response.text}
+
+    try:
+        return response.json()
+    except:
+        print("Non-JSON response:", response.text)
+        return {"error": "Invalid response from HF"}
 
 def generate_answer(query, docs):
     context = "\n\n".join([d.get("text", "") for d in docs])
@@ -35,6 +45,8 @@ Answer:
             "temperature": 0.3
         }
     })
+    if isinstance(output, dict) and "error" in output:
+    return "Model is loading or API error. Please try again in a few seconds."
 
     try:
         return output[0]["generated_text"]
