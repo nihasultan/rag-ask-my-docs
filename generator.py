@@ -5,7 +5,7 @@ generator = pipeline(
     "text-generation",          
     model="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
     torch_dtype=torch.float16,  
-    device_map="auto",         
+    device_map=None         
 )
 
 def generate_answer(query, docs):
