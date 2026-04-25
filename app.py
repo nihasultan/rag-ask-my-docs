@@ -9,8 +9,7 @@ st.title("📄 Ask My Docs")
 uploaded_file = st.file_uploader("Upload a PDF", type="pdf")
 
 if uploaded_file:
-    process_uploaded_file(uploaded_file)
-    initialize()
+    initialize(uploaded_file)
 
     query = st.text_input("Ask a question about your document:")
 

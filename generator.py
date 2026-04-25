@@ -10,9 +10,13 @@ def generate_answer(query, docs):
     context = "\n\n".join([d.get("text", "") for d in docs])
 
     prompt = f"""
-Answer the question in detail using the context below.
+You are a strict formatting assistant.
 
-Give at least 5 bullet points.
+RULES:
+- Always respond in bullet points
+- Each bullet must be a complete idea
+- Do not write paragraphs
+- Minimum 5 bullets
 
 Context:
 {context}
@@ -20,7 +24,7 @@ Context:
 Question:
 {query}
 
-Answer:
+Answer in bullet points only:
 """
 
     result = generator(
