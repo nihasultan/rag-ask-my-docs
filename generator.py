@@ -28,20 +28,17 @@ Question:
 Answer:
 """
 
+    try:
     response = client.chat.completions.create(
-    model="llama3-8b-8192",
-    messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant that answers ONLY from context."
-        },
-        {
-            "role": "user",
-            "content": prompt
-        }
-    ],
-    temperature=0.3,
-    max_tokens=400
-)
-
+        model="llama3-8b-8192",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.3,
+        max_tokens=400
+    )
     return response.choices[0].message.content
+
+    except Exception as e:
+        return f"❌ GROQ ERROR: {repr(e)}"
