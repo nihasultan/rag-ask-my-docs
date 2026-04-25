@@ -10,7 +10,7 @@ def generate_answer(query, docs):
         [d.get("text", "")[:300] for d in docs[:3]]  
     )
 
-    prompt = f"""Answer the question using only the context below. Write a detailed answer. Do not cut off mid-sentence.
+    prompt = f"""Answer the question using the context below. List the key points separated by | character.
 
 Context:
 {context}
@@ -18,16 +18,20 @@ Context:
 Question:
 {query}
 
-Answer:"""
+Key points separated by |:"""
 
-    result = generator(
-        prompt,
-        max_new_tokens=300,   
-        min_new_tokens=80,    
-        do_sample=False,
-        no_repeat_ngram_size=3, 
-    )
+result = generator(
+    prompt,
+    max_new_tokens=200,
+    min_new_tokens=60,
+    do_sample=False,
+    no_repeat_ngram_size=3,
+    early_stopping=False,
+)
 
-    text = result[0]["generated_text"]
+text = result[0]["generated_text"].strip()
 
-    return text  
+# Split on the delimiter and format as bullet points
+points = [p.strip() for p in text.split("|") if p.strip()]
+bullet_output = "\n".join(f"• {p}" for p in points)
+return bullet_output  
