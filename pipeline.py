@@ -1,16 +1,13 @@
 from generator import generate_answer
-from ingestion import process_uploaded_file, load_and_process_pdfs
+from ingestion import load_and_process_pdfs
 from retrieval import build_index, retrieve
 
 chunks = None
 index = None
 
-def initialize(uploaded_file):
+def initialize():
     global chunks, index
-
-    file_path, file_name = process_uploaded_file(uploaded_file)
-
-    chunks = load_and_process_pdfs(file_path, file_name)
+    chunks = load_and_process_pdfs()
     index, _ = build_index(chunks)
 
 def ask(query):

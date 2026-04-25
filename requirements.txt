@@ -1,7 +1,6 @@
 streamlit
-transformers
-torch
-accelerate
-safetensors
-sentencepiece
-protobuf
+sentence-transformers
+faiss-cpu
+numpy
+pypdf
+groq

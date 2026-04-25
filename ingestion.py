@@ -11,10 +11,10 @@ def load_and_process_pdfs(file_path, file_name):
             text = text.replace("\n", " ").strip()
 
             chunks.append({
-                "text": text,
-                "source": file_name,   
-                "page": i + 1
-            })
+            "text": text,
+            "source": uploaded_file.name,
+            "page": page_number
+        })
 
     return chunks
 
