@@ -20,18 +20,18 @@ Question:
 
 Key points separated by |:"""
 
-result = generator(
-    prompt,
-    max_new_tokens=200,
-    min_new_tokens=60,
-    do_sample=False,
-    no_repeat_ngram_size=3,
-    early_stopping=False,
-)
+    result = generator(
+        prompt,
+        max_new_tokens=200,
+        min_new_tokens=60,
+        do_sample=False,
+        no_repeat_ngram_size=3,
+        early_stopping=False,
+    )
 
-text = result[0]["generated_text"].strip()
+    text = result[0]["generated_text"].strip()
 
-# Split on the delimiter and format as bullet points
-points = [p.strip() for p in text.split("|") if p.strip()]
-bullet_output = "\n".join(f"• {p}" for p in points)
-return bullet_output  
+    # Split on the delimiter and format as bullet points
+    points = [p.strip() for p in text.split("|") if p.strip()]
+    bullet_output = "\n".join(f"• {p}" for p in points)
+    return bullet_output  
