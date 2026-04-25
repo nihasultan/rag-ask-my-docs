@@ -1,22 +1,21 @@
 from transformers import pipeline
 
-# Load once (cached by Streamlit automatically)
 generator = pipeline(
     "text2text-generation",
-    model="google/flan-t5-small",  # 🔥 small = fast + deployable
+    model="google/flan-t5-base",  
 )
 
 def generate_answer(query, docs):
     context = "\n\n".join([d.get("text", "") for d in docs])
 
     prompt = f"""
-You are a strict formatting assistant.
+You are an expert assistant.
 
-RULES:
-- Always respond in bullet points
-- Each bullet must be a complete idea
-- Do not write paragraphs
-- Minimum 5 bullets
+Your job is to answer the question using ONLY the context below.
+
+Write a detailed answer using bullet points.
+
+Each bullet should contain real information from the context.
 
 Context:
 {context}
@@ -24,7 +23,7 @@ Context:
 Question:
 {query}
 
-Answer in bullet points only:
+Answer:
 """
 
     result = generator(
