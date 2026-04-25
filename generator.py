@@ -26,10 +26,13 @@ Question:
 Answer:
 """
 
-    result = generator(
-        prompt,
-        max_new_tokens=500,
-        do_sample=False
-    )
+    text = result[0]["generated_text"]
+    lines = text.split("-")
 
-    return result[0]["generated_text"]
+    cleaned = []
+    for line in lines:
+        line = line.strip()
+        if line:
+            cleaned.append(f"- {line}")
+
+    return "\n".join(cleaned)

@@ -18,7 +18,7 @@ if uploaded_file:
             answer, sources = ask(query)
 
         st.subheader("Answer")
-        st.write(answer)
+        st.markdown(answer)
 
         st.subheader("Sources")
         for s in sources:
